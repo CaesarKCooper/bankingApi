@@ -1,42 +1,36 @@
-package address;
+package com.example.bankingapi.address;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.example.bankingapi.customer.Customer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+
 @Entity
 public class Address {
 
     @Id
-    @GeneratedValue //randomly assigned value
-    @Column(name="ADDRESS_ID")
+    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.AUTO) //randomly assigned value
+    @Column(name = "ID")
     public Long id;
 
-    @Column(name="STREET_NUMBER")
+    @Column(name = "street_number")
     public String street_number;
 
-    @Column(name="STREET_NAME")
+    @Column(name = "street_name")
     public String street_name;
 
-    @Column(name="CITY")
+    @Column(name = "city")
     public String city;
 
-    @Column(name="STATE")
+    @Column(name = "state")
     public String state;
 
-    @Column(name="ZIP")
+    @Column(name = "zip")
     public String zip;
 
-    public Address() {
-    }
 
-    public Address(Long id, String street_number, String street_name, String city, String state, String zip) {
-        this.id = id;
-        this.street_number = street_number;
-        this.street_name = street_name;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
+    public Address() {
     }
 
     public Long getId() {

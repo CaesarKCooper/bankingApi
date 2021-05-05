@@ -1,4 +1,4 @@
-package customer;
+package com.example.bankingapi.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -25,9 +24,15 @@ public class CustomerController {
 //        }
 //    }
 
+    @RequestMapping(value = "/hi", method = RequestMethod.GET)
+    public String sayHi(){
+        return "hi";
+    }
+
     @RequestMapping(value = "/customers", method = RequestMethod.POST)
-    public ResponseEntity<?> createCustomer(@Valid @RequestBody Customer customer) {
+    public ResponseEntity<?> createCustomer(@RequestBody Customer customer) {
         customerService.createCustomer(customer);
+        //set headers
         HttpHeaders responseHeaders = new HttpHeaders();
         URI newCustomerUri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -37,6 +42,7 @@ public class CustomerController {
         responseHeaders.setLocation(newCustomerUri);
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
+
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public ResponseEntity<Iterable<Customer>> getAllCustomers() {
         List<Customer> p = customerService.getAllCustomers();
@@ -44,11 +50,11 @@ public class CustomerController {
 //            throw new ResourceNotFoundException("No customer created yet");}
         return new ResponseEntity<>(customerService.getAllCustomers(), HttpStatus.OK);
     }
-    @RequestMapping(value = "/accounts/{accountId}/customer", method = RequestMethod.GET)
-    public ResponseEntity<?> getCustomerByAccount(@PathVariable Long accountId){
-        Optional<Customer> p = customerService.getCustomerByAccount(accountId);
+    @RequestMapping(value = "/accounts/{account_id}/customer", method = RequestMethod.GET)
+    public ResponseEntity<?> getCustomerByAccount(@PathVariable Long account_id){
+        Optional<Customer> p = customerService.getCustomerByAccount(account_id);
 //        if(!p.isPresent()) {
-//            throw new ResourceNotFoundException("Customer with id " + id + " not found");}
+//            throw new ResourceNotFoundException("Customer with customerId " + customerId + " not found");}
         return new ResponseEntity<> (p, HttpStatus.OK);
     }
 

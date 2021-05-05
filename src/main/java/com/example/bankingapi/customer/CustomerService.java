@@ -1,4 +1,4 @@
-package customer;
+package com.example.bankingapi.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +24,8 @@ public class CustomerService {
         return listOfCustomers;
     }
 
-    public Optional<Customer> getCustomerByAccount(Long accountId) {
-        return customerRepository.findById(accountId);
+    public Optional<Customer> getCustomerByAccount(Long account_id) {
+        return customerRepository.findById(account_id);
     }
 
     public Optional<Customer> getCustomerById(Long id) {

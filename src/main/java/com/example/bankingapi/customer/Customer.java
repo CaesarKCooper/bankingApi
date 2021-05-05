@@ -1,19 +1,23 @@
-package customer;
+package com.example.bankingapi.customer;
 
-import address.Address;
-
+import com.example.bankingapi.address.Address;
+import javax.persistence.*;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Set;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
+@Table(name = "customer")
 public class Customer {
 
     @Id
-    @GeneratedValue
-    @Column(name="CUSTOMER_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="ID")
     private Long id;
 
     @Column(name="FIRST_NAME")
@@ -22,18 +26,20 @@ public class Customer {
     @Column(name="LAST_NAME")
     private String last_name;
 
+    @OneToMany(cascade = CascadeType.ALL)
     @Column(name="ADDRESS")
     private Set<Address> address;
 
-    public Customer() {
-    }
+//    public Customer() {
+//    }
 
-    public Customer(Long id, String first_name, String last_name, Set<Address> address) {
-        this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.address = address;
-    }
+//    public Customer(Long customer_id, String first_name, String last_name, Set<Address> address) {
+//        this.customer_id = customer_id;
+//        this.first_name = first_name;
+//        this.last_name = last_name;
+//        this.address = address;
+//    }
+
 
     public Long getId() {
         return id;
