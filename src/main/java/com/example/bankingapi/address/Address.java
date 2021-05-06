@@ -1,4 +1,4 @@
-package com.example.bankingApi.address;
+package com.example.bankingapi.address;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

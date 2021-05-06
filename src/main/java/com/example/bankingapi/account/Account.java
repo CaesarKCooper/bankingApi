@@ -1,7 +1,7 @@
-package com.example.bankingApi.account;
+package com.example.bankingapi.account;
 
 
-import com.example.bankingApi.customer.Customer;
+import com.example.bankingapi.customer.Customer;
 
 import javax.persistence.*;
 
@@ -10,15 +10,10 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ACCOUNT_ID")
     private Long id;
-    @Column(name = "ACCOUNT_TYPE")
     AccountType type;
-    @Column(name = "ACCOUNT_NAME")
     private String nickname;
-    @Column(name = "REWARD_POINTS")
     private Integer rewards;
-    @Column(name = "ACCOUNT_BALANCE")
     private Double balance;
     @ManyToOne
     private Customer customer;

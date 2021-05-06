@@ -1,6 +1,5 @@
-package com.example.bankingApi.account;
+package com.example.bankingapi.account;
 
-import com.example.bankingApi.account.Account;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

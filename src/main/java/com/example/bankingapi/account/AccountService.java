@@ -1,12 +1,8 @@
-package com.example.bankingApi.account;
+package com.example.bankingapi.account;
 
-import com.example.bankingApi.account.Account;
-import com.example.bankingApi.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
