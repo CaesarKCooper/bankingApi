@@ -1,6 +1,8 @@
 package com.example.bankingApi.account;
 
 
+import com.example.bankingApi.customer.Customer;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,7 +20,7 @@ public class Account {
     private Integer rewards;
     @Column(name = "ACCOUNT_BALANCE")
     private Double balance;
-    @Column(name = "CUSTOMER")
+    @ManyToOne
     private Customer customer;
 
     public Long getId() {
@@ -67,17 +69,5 @@ public class Account {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", type=" + type +
-                ", nickname='" + nickname + '\'' +
-                ", rewards=" + rewards +
-                ", balance=" + balance +
-                ", customer=" + customer +
-                '}';
     }
 }
