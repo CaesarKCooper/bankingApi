@@ -19,12 +19,12 @@ public class Account {
     private Integer rewards;
     @Column
     private Double balance;
-    @Column(name = "customer_id")
     private Long customerId;
-    @JsonIgnore
+
+    /*@JsonIgnore
     @ManyToOne
-    private Customer customer;
-    
+    private Customer customer;*/
+
 
     public Long getId() {
         return id;
@@ -73,12 +73,5 @@ public class Account {
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 }
+

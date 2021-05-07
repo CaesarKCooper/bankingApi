@@ -24,9 +24,6 @@ public class Customer {
     private String last_name;
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Address> address;
-    @JsonIgnore
-    private Account account;
-
 
     public Long getId() {
         return id;
