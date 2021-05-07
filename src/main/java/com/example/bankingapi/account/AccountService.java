@@ -21,14 +21,14 @@ public class AccountService {
         return accountRepository.findById(accountId);
     }
 
-        public Iterable<Account> getAllAccountsByCustomer(Long customerId){
+//        public Iterable<Account> getAllAccountsByCustomer(Long customerId){
+//
+//            return accountRepository.findAllByCustomerId(customerId);
+//    }
 
-            return accountRepository.findAllByCustomerId(customerId);
-    }
+    public void createAccount(Account account){
 
-    public void createAccount(Account account, Long customerId){
-
-        account.setCustomerId(customerId);
+        //account.setCustomerId(customerId);
         accountRepository.save(account);
 
     }

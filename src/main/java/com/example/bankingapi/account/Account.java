@@ -1,6 +1,7 @@
 package com.example.bankingapi.account;
 import com.example.bankingapi.customer.Customer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
@@ -19,12 +20,21 @@ public class Account {
     private Integer rewards;
     @Column
     private Double balance;
-    @Column(name = "customer_id")
-    private Long customerId;
-    @JsonIgnore
+
+//    @Column(name = "customer_id")sla
+//    private Long customerId;
+//    @JsonIgnore
+
+
+    @JsonProperty("customer_id")
+    public Long getCustomerId(){
+        return this.customer.getId();
+    }
+
+    @JoinColumn(name = "customer_id")
     @ManyToOne
+    @JsonIgnore
     private Customer customer;
-    
 
     public Long getId() {
         return id;
@@ -66,13 +76,13 @@ public class Account {
         this.balance = balance;
     }
 
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
+//    public Long getCustomerId() {
+//        return customerId;
+//    }
+//
+//    public void setCustomerId(Long customerId) {
+//        this.customerId = customerId;
+//    }
 
     public Customer getCustomer() {
         return customer;
