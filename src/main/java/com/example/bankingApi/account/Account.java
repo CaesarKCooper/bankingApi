@@ -22,6 +22,7 @@ public class Account {
     private Double balance;
     @ManyToOne
     private Customer customer;
+    
 
     public Long getId() {
         return id;

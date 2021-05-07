@@ -1,5 +1,7 @@
 package com.example.bankingApi.customer;
 
+import com.example.bankingApi.account.Account;
+import com.example.bankingApi.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,10 @@ public class CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private AccountRepository accountRepository;
+    private Object Optional;
+    private Object Customer;
 
 
     public void createCustomer(Customer customer){
@@ -25,14 +31,11 @@ public class CustomerService {
     }
 
     public Optional<Customer> getCustomerByAccountId(Long account_id) {
-        return customerRepository.findById(account_id);
+        Optional<Customer> customer = java.util.Optional.ofNullable(accountRepository.findById(account_id).get().getCustomer());
+        return customer;
     }
 
     public Optional<Customer> getCustomerById(Long id) {
-
-        //go over list of customers
-        //compare each account selected id
-        //return account that matches
         return customerRepository.findById(id);
     }
 
