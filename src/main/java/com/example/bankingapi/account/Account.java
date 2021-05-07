@@ -1,25 +1,27 @@
-package com.example.bankingApi.account;
-
-
-import com.example.bankingApi.customer.Customer;
+package com.example.bankingapi.account;
+import com.example.bankingapi.customer.Customer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 @Entity
 public class Account {
 
+    //at end change customer id to Customer customer and only show id//
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ACCOUNT_ID")
     private Long id;
-    @Column(name = "ACCOUNT_TYPE")
+    @Column
     AccountType type;
-    @Column(name = "ACCOUNT_NAME")
     private String nickname;
-    @Column(name = "REWARD_POINTS")
+    @Column
     private Integer rewards;
-    @Column(name = "ACCOUNT_BALANCE")
+    @Column
     private Double balance;
+    @Column(name = "customer_id")
+    private Long customerId;
+    @JsonIgnore
     @ManyToOne
     private Customer customer;
     
@@ -62,6 +64,14 @@ public class Account {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     public Customer getCustomer() {

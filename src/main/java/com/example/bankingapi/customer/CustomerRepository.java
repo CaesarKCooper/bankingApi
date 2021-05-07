@@ -1,4 +1,4 @@
-package com.example.bankingApi.customer;
+package com.example.bankingapi.customer;
 
 import org.springframework.data.repository.CrudRepository;
 

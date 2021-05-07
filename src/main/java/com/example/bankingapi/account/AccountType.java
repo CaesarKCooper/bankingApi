@@ -1,4 +1,4 @@
-package com.example.bankingApi.account;
+package com.example.bankingapi.account;
 
 public enum AccountType {
 

@@ -1,10 +1,8 @@
-package com.example.bankingApi.account;
+package com.example.bankingapi.account;
 
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -35,7 +33,7 @@ public class AccountController {
     @RequestMapping(method = RequestMethod.POST, value = "/customers/{customerId}/accounts")
     public ResponseEntity<?> createAccount(@PathVariable Long customerId, @RequestBody Account account){
 
-        accountService.createAccount(account);
+        accountService.createAccount(account, customerId);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 

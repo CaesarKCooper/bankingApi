@@ -1,10 +1,8 @@
-package com.example.bankingApi.customer;
+package com.example.bankingapi.customer;
 
-import com.example.bankingApi.account.Account;
-import com.example.bankingApi.account.AccountRepository;
+import com.example.bankingapi.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,12 +17,12 @@ public class CustomerService {
     private Object Optional;
     private Object Customer;
 
-
     public void createCustomer(Customer customer){
         customerRepository.save(customer);
     }
 
     public List<Customer> getAllCustomers() {
+
         List<Customer> listOfCustomers = new ArrayList<>();
         customerRepository.findAll().forEach(listOfCustomers::add);
         return listOfCustomers;
@@ -46,4 +44,5 @@ public class CustomerService {
     public void deleteCustomer(Long id) {
         customerRepository.deleteById(id);
     }
+
 }
