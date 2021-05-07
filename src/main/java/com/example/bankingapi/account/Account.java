@@ -20,8 +20,8 @@ public class Account {
     private Double balance;
     @Column(name = "customer_id")
     private Long customerId;
-    @ManyToOne
     @JsonIgnore
+    @ManyToOne
     private Customer customer;
 
     public Long getId() {
