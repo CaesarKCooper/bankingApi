@@ -1,5 +1,5 @@
 package com.example.bankingapi.customer;
-import com.example.bankingapi.account.Account;
+
 import com.example.bankingapi.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,15 +12,12 @@ public class CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
-
     @Autowired
     private AccountRepository accountRepository;
-
     private Object Optional;
     private Object Customer;
 
     public void createCustomer(Customer customer){
-
         customerRepository.save(customer);
     }
 
@@ -32,23 +29,19 @@ public class CustomerService {
     }
 
     public Optional<Customer> getCustomerByAccountId(Long account_id) {
-
         Optional<Customer> customer = java.util.Optional.ofNullable(accountRepository.findById(account_id).get().getCustomer());
         return customer;
     }
 
     public Optional<Customer> getCustomerById(Long id) {
-
         return customerRepository.findById(id);
     }
 
     public void updateCustomer(Customer customer) {
-
         customerRepository.save(customer);
     }
 
     public void deleteCustomer(Long id) {
-
         customerRepository.deleteById(id);
     }
 

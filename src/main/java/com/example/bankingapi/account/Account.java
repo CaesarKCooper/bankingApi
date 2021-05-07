@@ -1,6 +1,4 @@
 package com.example.bankingapi.account;
-
-
 import com.example.bankingapi.customer.Customer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -14,15 +12,19 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
     AccountType type;
     private String nickname;
+    @Column
     private Integer rewards;
+    @Column
     private Double balance;
     @Column(name = "customer_id")
     private Long customerId;
     @JsonIgnore
     @ManyToOne
     private Customer customer;
+    
 
     public Long getId() {
         return id;
