@@ -1,7 +1,5 @@
-package com.example.bankingApi.service;
+package com.example.bankingapi.deposit;
 
-import com.example.bankingApi.deposit.Deposit;
-import com.example.bankingApi.repo.DepositRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +28,7 @@ public class DepositService {
         depositRepo.save(deposit);
     }
 
-    public void deleteDeposit(Long depositId) {
+    public void deleteDeposit(Deposit depositId) {
         depositRepo.delete(depositId);
     }
 }

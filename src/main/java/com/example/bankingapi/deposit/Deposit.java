@@ -1,4 +1,4 @@
-package com.example.bankingApi.deposit;
+package com.example.bankingapi.deposit;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

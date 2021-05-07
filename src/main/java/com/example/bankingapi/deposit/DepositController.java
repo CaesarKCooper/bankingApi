@@ -1,8 +1,6 @@
-package com.example.bankingApi.controller;
+package com.example.bankingapi.deposit;
 
-import com.example.bankingApi.deposit.Deposit;
-import com.example.bankingApi.repo.DepositRepo;
-import com.example.bankingApi.service.DepositService;
+import com.example.bankingapi.account.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,7 +26,7 @@ public class DepositController {
     }
 
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Deposit>> getAllDeposits() {
+    public ResponseEntity<Iterable<Deposit>> getAllDeposits(@PathVariable Deposit deposit) {
         depositService.getAllDeposits();
         return new ResponseEntity<>(depositRepo.findAll(), HttpStatus.OK);
     }
@@ -41,14 +39,13 @@ public class DepositController {
     }
 
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.POST)
-    public ResponseEntity<?> createDeposit(@RequestBody Deposit deposit){
+    public ResponseEntity<?> createDeposit(@PathVariable Account account, @RequestBody Deposit deposit){
         depositService.createDeposit(deposit);
-
-        //HttpHeaders responseHeaders = new HttpHeaders();
-        //URI newDepositUri = ServletUriComponentsBuilder
-                //.fromCurrentRequest()
-                //.path("").buildAndExpand(deposit.getId()).toUri();
-        //responseHeaders.setLocation(newDepositUri);
+        HttpHeaders responseHeaders = new HttpHeaders();
+        URI newDepositUri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{depositId}").buildAndExpand(deposit.getId()).toUri();
+        responseHeaders.setLocation(newDepositUri);
 
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
@@ -62,9 +59,9 @@ public class DepositController {
     }
 
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteDeposit(@PathVariable Long depositid) {
-        verifyDeposit(depositid);
-        depositService.deleteDeposit(depositid);
+    public ResponseEntity<?> deleteDeposit(@PathVariable Deposit deposit, Long depositId) {
+        verifyDeposit(depositId);
+        depositService.deleteDeposit(deposit);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
