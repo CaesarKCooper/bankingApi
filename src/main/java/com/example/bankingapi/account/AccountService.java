@@ -23,17 +23,14 @@ public class AccountService {
 
         public Iterable<Account> getAllAccountsByCustomer(Long customerId){
 
-        //list of account (repository)
-        //loop through list of accounts
-        //compare accounts to customer id
-        //return matching accounts
-
             return accountRepository.findAllByCustomerId(customerId);
     }
 
-    public void createAccount(Account account){
+    public void createAccount(Account account, Long customerId){
 
+        account.setCustomerId(customerId);
         accountRepository.save(account);
+
     }
 
     public void updateAccount(Account account){
