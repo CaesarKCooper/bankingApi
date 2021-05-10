@@ -1,9 +1,12 @@
 package com.example.bankingapi.deposit;
 
 import com.example.bankingapi.account.Account;
+import com.example.bankingapi.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -13,32 +16,44 @@ public class DepositService {
     DepositRepo depositRepo;
 
     @Autowired
-    Account account;
+    AccountService accountService;
 
-    public void getAllDeposits(){
-        Iterable<Deposit> allDeposits = depositRepo.findAll();
+/*
+    public Iterable<Deposit> getAllDepositsByAccountId(Long accountId){
+
+        Iterable<Deposit> deposits = depositRepo.findAll();
+
+        for(Deposit deposit : deposits){
+            if(deposit.getPayee_id().equals(accountId)){
+                return deposits;
+            }
+        }
+       return null;
+    }
+*/
+
+    public Optional<Deposit> getDepositById(Long depositsId){
+        return depositRepo.findById(depositsId);
     }
 
-    public Optional getDepositById(Long depositId){
-        return depositRepo.findById(depositId);
-    }
 
+    public Deposit createDeposit(Deposit deposit, Long accountId) {
 
-    public void createDeposit(Deposit deposit) {
-        depositRepo.save(deposit);
-        //loop thru all deposits
+        Optional<Account> account = accountService.getAccountByAccountId(accountId);
+        Double accountBalance = account.get().getBalance();
+        Double depositAmount = deposit.getAmount();
 
-        //compare the bills to the account that its in and add it to the account
-        //for (int i = 0; i < ; i++) {
+        Double transaction = depositAmount += accountBalance;
+        account.get().setBalance(transaction);
 
-        //}
+        return depositRepo.save(deposit);
     }
 
     public void updateDeposit(Deposit deposit){
         depositRepo.save(deposit);
     }
 
-    public void deleteDeposit(Deposit depositId) {
-        depositRepo.delete(depositId);
+    public void deleteDepositById(Long depositsId) {
+        depositRepo.deleteById(depositsId);
     }
 }
