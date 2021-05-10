@@ -1,8 +1,6 @@
 package com.example.bankingapi.customer;
 
-import com.example.bankingapi.account.Account;
 import com.example.bankingapi.address.Address;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Set;

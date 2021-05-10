@@ -4,20 +4,16 @@ import javax.persistence.*;
 
 @Entity
 public class Withdrawal {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+
     private String transaction_date;
-    @Column
     private String status;
-    @Column
     private Long payer_id;
-    @Column
     private String medium;
-    @Column
     private Double amount;
-    @Column
     private String description;
 
     public Long getId() {
