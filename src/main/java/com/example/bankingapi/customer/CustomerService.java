@@ -22,10 +22,10 @@ public class CustomerService {
     private Object Optional;
     private Object Customer;
 
-    public void createCustomer(Customer customer){
+    public Customer createCustomer(Customer customer){
 
         customerLog.info("===== CREATING CUSTOMER " + customer.getFirst_name() + ", " + customer.getLast_name() + " =====");
-        customerRepository.save(customer);
+        return customerRepository.save(customer);
     }
 
     public List<Customer> getAllCustomers() {
@@ -51,13 +51,13 @@ public class CustomerService {
 
     public void updateCustomer(Customer customer) {
 
-        customerLog.info("** UPDATING ** CUSTOMER ** WITH ** ID ** " + customer.getId() + " **");
+        customerLog.info("===== UPDATING CUSTOMER WITH ID " + customer.getId() + " =====");
         customerRepository.save(customer);
     }
 
     public void deleteCustomer(Long id) {
 
-        customerLog.info("** DELETING ** CUSTOMER ** WITH ** ID ** " + id + " **");
+        customerLog.info("===== DELETING CUSTOMER WITH ID " + id + " =====");
         customerRepository.deleteById(id);
     }
 

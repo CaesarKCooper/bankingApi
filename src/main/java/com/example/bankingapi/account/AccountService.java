@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class AccountService {
 
-    Logger accountLog = LoggerFactory.getLogger(AccountController.class);
+    Logger accountLog = LoggerFactory.getLogger(AccountService.class);
 
     @Autowired
     AccountRepository accountRepository;
@@ -34,11 +34,11 @@ public class AccountService {
             return accountRepository.findAllByCustomerId(customerId);
     }
 
-    public void createAccount(Account account, Long customerId){
+    public Account createAccount(Account account, Long customerId){
 
         accountLog.info("===== CREATING ACCOUNT FOR CUSTOMER WITH ID " + customerId + " =====");
         account.setCustomerId(customerId);
-        accountRepository.save(account);
+        return accountRepository.save(account);
 
     }
 
