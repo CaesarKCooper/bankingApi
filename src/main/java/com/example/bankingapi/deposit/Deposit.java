@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.xml.transform.sax.SAXResult;
 
 @Entity
 public class Deposit {
@@ -19,6 +20,8 @@ public class Deposit {
     private Long payee_id;
     private String medium;
     private Double amount;
+    private String description;
+
 
     public Deposit() {
 
@@ -80,6 +83,13 @@ public class Deposit {
         this.amount = amount;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     @Override
     public String toString() {
