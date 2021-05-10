@@ -32,11 +32,11 @@ public class DepositController {
     }
 
 
-//    @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.GET)
-//    public ResponseEntity<?> getDepositById(@PathVariable Long depositId) {
-//
-//        return new ResponseEntity<>(HttpStatus.OK, depositService.getDepositById(depositId));
-//    }
+    @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.GET)
+    public ResponseEntity<?> getDepositById(@PathVariable Long depositId) {
+
+        return new ResponseEntity<>(HttpStatus.OK, depositService.getDepositById(depositId));
+    }
 
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.POST)
     public ResponseEntity<?> createDeposit(@PathVariable Long accountId, @RequestBody Deposit deposit){

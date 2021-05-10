@@ -38,9 +38,9 @@ public class DepositService {
 
     public Deposit createDeposit(Deposit deposit, Long accountId) {
 
-//       Optional<Account> account = accountService.getAccountByAccountId(accountId);
-//       if (deposit.getAmount() > 0)
-//       account.get().setBalance(deposit.getAmount());
+       Optional<Account> account = accountService.getAccountByAccountId(accountId);
+       if (deposit.getAmount() > 0)
+       account.get().setBalance(deposit.getAmount());
 
         return depositRepo.save(deposit);
     }
