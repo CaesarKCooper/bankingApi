@@ -1,11 +1,6 @@
 package com.example.bankingapi.customer;
 
-<<<<<<< HEAD
-import com.example.bankingapi.account.AccountRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-=======
->>>>>>> f2ceef53bc327cd1a9ceb764204412694d7e6a73
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
