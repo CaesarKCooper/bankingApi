@@ -1,4 +1,5 @@
 package com.example.bankingapi.bill;
+import com.example.bankingapi.account.Account;
 import com.example.bankingapi.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,18 @@ public class BillService {
         List<Long> accountId = billRepo.getAccountIdThatMatchesCustomerId(customer_id);
         return billRepo.getBillsThatMatchAccountIdInBillWithAccountIdInAccountToUseAfterFindingCustomerByIdInAccount(accountId);
     }
+
+    @Autowired AccountRepository accountRepository;
+    public boolean accountCheck(Long accountId){
+        Account account = accountRepository.findById(accountId).orElse(null);
+        return account != null;
+    }
+
+    public boolean billCheck(Long billId){
+        Bill bill = billRepo.findById(billId).orElse(null);
+        return bill != null;
+    }
+
 
     public Bill createBill(Bill bill) {
         return billRepo.save(bill);
