@@ -51,7 +51,7 @@ public class BillController {
         }
         CodeData response = new CodeData(200, bills);
 
-        return new ResponseEntity<>(bills, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/accounts/{accountId}/bills")
