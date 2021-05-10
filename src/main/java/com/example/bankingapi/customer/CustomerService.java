@@ -29,8 +29,9 @@ public class CustomerService {
     }
 
     public Optional<Customer> getCustomerByAccountId(Long account_id) {
-        Optional<Customer> customer = java.util.Optional.ofNullable(accountRepository.findById(account_id).get().getCustomer());
-        return customer;
+
+        Long customerId = accountRepository.findById(account_id).get().getCustomerId();
+        return customerRepository.findById(customerId);
     }
 
     public Optional<Customer> getCustomerById(Long id) {

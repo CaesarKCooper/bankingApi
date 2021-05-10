@@ -24,16 +24,16 @@ public class AccountController {
         return new ResponseEntity<>(accountService.getAccountById(accountId), HttpStatus.OK);
     }
 
-//    @RequestMapping(method = RequestMethod.GET, value = "/customers/{customerId}/accounts")
-//    public Iterable<Account> getAllAccountsByCustomer(@PathVariable Long customerId){
-//
-//        return accountService.getAllAccountsByCustomer(customerId);
-//    }
+    @RequestMapping(method = RequestMethod.GET, value = "/customers/{customerId}/accounts")
+    public Iterable<Account> getAllAccountsByCustomer(@PathVariable Long customerId){
+
+        return accountService.getAllAccountsByCustomer(customerId);
+    }
 
     @RequestMapping(method = RequestMethod.POST, value = "/customers/{customerId}/accounts")
     public ResponseEntity<?> createAccount(@PathVariable Long customerId, @RequestBody Account account){
 
-        accountService.createAccount(account);
+        accountService.createAccount(account, customerId);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 
