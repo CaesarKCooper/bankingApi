@@ -1,8 +1,5 @@
 package com.example.bankingapi.account;
 
-import com.example.bankingapi.BankingApiApplication;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,21 +18,22 @@ public class AccountController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/accounts/{accountId}")
-    public ResponseEntity<?> getAccountByAccountId(@PathVariable Long accountId){
+    public ResponseEntity<?> getAccountById(@PathVariable Long accountId){
 
-        return new ResponseEntity<>(accountService.getAccountByAccountId(accountId), HttpStatus.OK);
+
+        return new ResponseEntity<>(accountService.getAccountById(accountId), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/customers/{customerId}/accounts")
-    public Iterable<Account> getAllAccountsByCustomerId(@PathVariable Long customerId){
+    public Iterable<Account> getAllAccountsByCustomer(@PathVariable Long customerId){
 
-        return accountService.getAllAccountsByCustomerId(customerId);
+        return accountService.getAllAccountsByCustomer(customerId);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/customers/{customerId}/accounts")
     public ResponseEntity<?> createAccount(@PathVariable Long customerId, @RequestBody Account account){
 
-        accountService.createAccount(account, customerId);
+        accountService.createAccount(account);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 
