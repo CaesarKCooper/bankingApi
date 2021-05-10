@@ -19,13 +19,11 @@ public class DepositController {
     @Autowired
     private DepositRepo depositRepo;
 
-/*
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.GET)
     public ResponseEntity<Iterable<Deposit>> getAllDepositsByAccountId(@PathVariable Long accountId) {
 
         return new ResponseEntity<>(depositService.getAllDepositsByAccountId(accountId), HttpStatus.OK);
     }
-*/
 
 
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.GET)

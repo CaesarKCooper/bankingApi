@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class AccountService {
 
-    Logger accountLog = LoggerFactory.getLogger(AccountService.class);
+    Logger accountLog = LoggerFactory.getLogger(AccountController.class);
 
     @Autowired
     AccountRepository accountRepository;

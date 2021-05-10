@@ -14,8 +14,6 @@ import java.util.Optional;
 @RestController
 public class CustomerController {
 
-    Logger logger = LoggerFactory.getLogger(CustomerController.class);
-
     @Autowired
     private CustomerService customerService;
 

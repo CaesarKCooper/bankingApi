@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class CustomerService {
 
-    Logger customerLog = LoggerFactory.getLogger(CustomerService.class);
+    Logger customerLog = LoggerFactory.getLogger(CustomerController.class);
 
     @Autowired
     private CustomerRepository customerRepository;
