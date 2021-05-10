@@ -94,12 +94,14 @@ public class Deposit {
     @Override
     public String toString() {
         return "Deposit{" +
-                "type='" + type + '\'' +
+                "id=" + id +
+                ", type='" + type + '\'' +
                 ", transaction_date='" + transaction_date + '\'' +
                 ", status='" + status + '\'' +
                 ", payee_id=" + payee_id +
                 ", medium='" + medium + '\'' +
                 ", amount=" + amount +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

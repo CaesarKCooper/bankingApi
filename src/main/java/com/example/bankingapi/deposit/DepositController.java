@@ -25,43 +25,42 @@ public class DepositController {
         }
     }
 
-    @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Deposit>> getAllDeposits(@PathVariable Deposit deposit) {
-        depositService.getAllDeposits();
-        return new ResponseEntity<>(depositRepo.findAll(), HttpStatus.OK);
+    @RequestMapping(value = "/accounts/{accountId}/deposit", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<Deposit>> getAllDepositsByAccountId(@PathVariable Long accountId) {
+
+        return new ResponseEntity<>(depositService.getAllDepositsByAccountId(accountId), HttpStatus.OK);
     }
 
 
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.GET)
     public ResponseEntity<?> getDepositById(@PathVariable Long depositId) {
-        depositService.getDepositById(depositId);
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        return new ResponseEntity<>(HttpStatus.OK, depositService.getDepositById(depositId));
     }
 
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.POST)
-    public ResponseEntity<?> createDeposit(@PathVariable Account account, @RequestBody Deposit deposit){
-        depositService.createDeposit(deposit);
-        HttpHeaders responseHeaders = new HttpHeaders();
-        URI newDepositUri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{depositId}").buildAndExpand(deposit.getId()).toUri();
-        responseHeaders.setLocation(newDepositUri);
+    public ResponseEntity<?> createDeposit(@PathVariable Long accountId, @RequestBody Deposit deposit){
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        URI newDepositUri = ServletUriComponentsBuilder
+//                .fromCurrentRequest()
+//                .path("/{depositId}").buildAndExpand(deposit.getId()).toUri();
+//        responseHeaders.setLocation(newDepositUri);
 
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        return new ResponseEntity<>(depositService.createDeposit(deposit, accountId), HttpStatus.CREATED);
     }
 
 
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateDeposit(Deposit deposit , @PathVariable Long depositId){
-        verifyDeposit(depositId);
+    public ResponseEntity<?> updateDeposit(Deposit deposit , @PathVariable Long depositsId){
+        verifyDeposit(depositsId);
         depositService.updateDeposit(deposit);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteDeposit(@PathVariable Deposit deposit, Long depositId) {
-        verifyDeposit(depositId);
-        depositService.deleteDeposit(deposit);
+    public ResponseEntity<?> deleteDeposit(@PathVariable Long depositsId) {
+        verifyDeposit(depositsId);
+        depositService.deleteDepositById(depositsId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

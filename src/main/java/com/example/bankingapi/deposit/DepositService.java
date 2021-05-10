@@ -1,9 +1,11 @@
 package com.example.bankingapi.deposit;
 
 import com.example.bankingapi.account.Account;
+import com.example.bankingapi.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -13,32 +15,41 @@ public class DepositService {
     DepositRepo depositRepo;
 
     @Autowired
-    Account account;
+    AccountService accountService;
+//    @Autowired
+//    Account account;
 
-    public void getAllDeposits(){
-        Iterable<Deposit> allDeposits = depositRepo.findAll();
+    public Iterable<Deposit> getAllDepositsByAccountId(Long accountId){
+
+        Iterable<Deposit> deposits = depositRepo.findAll();
+
+        for (Deposit deposit: deposits) {
+            if (deposit.getPayee_id().equals(accountId)){
+                return deposits;
+            }
+        }
+        return null;
     }
 
-    public Optional getDepositById(Long depositId){
+    public Optional<Deposit> getDepositById(Long depositId){
         return depositRepo.findById(depositId);
     }
 
 
-    public void createDeposit(Deposit deposit) {
-        depositRepo.save(deposit);
-        //loop thru all deposits
+    public Deposit createDeposit(Deposit deposit, Long accountId) {
 
-        //compare the bills to the account that its in and add it to the account
-        //for (int i = 0; i < ; i++) {
+//       Optional<Account> account = accountService.getAccountByAccountId(accountId);
+//       if (deposit.getAmount() > 0)
+//       account.get().setBalance(deposit.getAmount());
 
-        //}
+        return depositRepo.save(deposit);
     }
 
-    public void updateDeposit(Deposit deposit){
-        depositRepo.save(deposit);
+    public void updateDeposit(Deposit deposits){
+        depositRepo.save(deposits);
     }
 
-    public void deleteDeposit(Deposit depositId) {
-        depositRepo.delete(depositId);
+    public void deleteDepositById(Long depositsId) {
+        depositRepo.deleteById(depositsId);
     }
 }
