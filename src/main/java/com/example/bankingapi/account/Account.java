@@ -1,23 +1,30 @@
 package com.example.bankingapi.account;
-
-
 import com.example.bankingapi.customer.Customer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 @Entity
 public class Account {
 
+    //at end change customer id to Customer customer and only show id//
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
     AccountType type;
     private String nickname;
+    @Column
     private Integer rewards;
+    @Column
     private Double balance;
+    private Long customerId;
+
+    /*@JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private Customer customer;*/
+
 
     public Long getId() {
         return id;
@@ -59,11 +66,12 @@ public class Account {
         this.balance = balance;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 }
+
