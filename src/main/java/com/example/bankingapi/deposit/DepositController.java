@@ -33,24 +33,24 @@ public class DepositController {
         return new ResponseEntity<>(depositService.getDepositById(depositsId),HttpStatus.OK);
     }
 
-
-
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.POST)
     public ResponseEntity<?> createDeposit(@PathVariable Long accountId, @RequestBody Deposit deposit){
+
+
         return new ResponseEntity<>(depositService.createDeposit(deposit, accountId), HttpStatus.CREATED);
     }
 
 
-
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateDeposit(@PathVariable Long depositsId, @RequestBody Deposit deposit){
+
         depositService.updateDeposit(deposit);
         return new ResponseEntity<>("Accepted deposit modification", HttpStatus.OK);
     }
 
-
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteDeposit(@PathVariable Long depositsId) {
+
         depositService.deleteDepositById(depositsId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

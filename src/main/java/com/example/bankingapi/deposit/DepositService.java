@@ -41,7 +41,7 @@ public class DepositService {
         Double accountBalance = account.get().getBalance();
         Double depositAmount = deposit.getAmount();
 
-        Double transaction = depositAmount + accountBalance;
+        Double transaction = depositAmount += accountBalance;
         account.get().setBalance(transaction);
 
         return depositRepo.save(deposit);

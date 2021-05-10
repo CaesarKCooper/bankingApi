@@ -21,6 +21,11 @@ public class Account {
     private Double balance;
     private Long customerId;
 
+    /*@JsonIgnore
+    @ManyToOne
+    private Customer customer;*/
+
+
     public Long getId() {
         return id;
     }
