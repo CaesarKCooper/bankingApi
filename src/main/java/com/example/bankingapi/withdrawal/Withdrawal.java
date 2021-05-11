@@ -1,21 +1,16 @@
-package com.example.bankingapi.deposit;
+package com.example.bankingapi.withdrawal;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.xml.transform.sax.SAXResult;
+import javax.persistence.*;
 
 @Entity
-public class Deposit {
+public class Withdrawal {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String type;
     private String transaction_date;
     private String status;
-    private Long payee_id;
+    private Long payer_id;
     private String medium;
     private Double amount;
     private String description;
@@ -26,14 +21,6 @@ public class Deposit {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getTransaction_date() {
@@ -52,12 +39,12 @@ public class Deposit {
         this.status = status;
     }
 
-    public Long getPayee_id() {
-        return payee_id;
+    public Long getPayer_id() {
+        return payer_id;
     }
 
-    public void setPayee_id(Long payee_id) {
-        this.payee_id = payee_id;
+    public void setPayer_id(Long payer_id) {
+        this.payer_id = payer_id;
     }
 
     public String getMedium() {
