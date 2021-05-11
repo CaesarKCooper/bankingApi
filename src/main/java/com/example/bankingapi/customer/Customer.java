@@ -1,9 +1,6 @@
 package com.example.bankingapi.customer;
 
-import com.example.bankingapi.account.Account;
 import com.example.bankingapi.address.Address;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -22,6 +19,7 @@ public class Customer {
     private Long id;
     private String first_name;
     private String last_name;
+
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Address> address;
 
