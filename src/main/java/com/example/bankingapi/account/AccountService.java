@@ -16,19 +16,19 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
-    public Optional<Account> getAccountById(Long accountId){
+    public Optional<Account> getAccountByAccountId(Long accountId){
 
         return accountRepository.findById(accountId);
     }
 
-        public Iterable<Account> getAllAccountsByCustomer(Long customerId){
+    public Iterable<Account> getAllAccountsByCustomer(Long customerId){
 
         //list of account (repository)
         //loop through list of accounts
         //compare accounts to customer id
         //return matching accounts
 
-            return accountRepository.findAllByCustomerId(customerId);
+        return accountRepository.findAllByCustomerId(customerId);
     }
 
     public void createAccount(Account account){

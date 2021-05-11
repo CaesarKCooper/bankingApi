@@ -22,7 +22,6 @@ public class DepositController {
 /*
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.GET)
     public ResponseEntity<Iterable<Deposit>> getAllDepositsByAccountId(@PathVariable Long accountId) {
-
         return new ResponseEntity<>(depositService.getAllDepositsByAccountId(accountId), HttpStatus.OK);
     }
 */

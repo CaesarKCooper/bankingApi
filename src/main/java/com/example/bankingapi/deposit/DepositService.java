@@ -20,9 +20,7 @@ public class DepositService {
 
 /*
     public Iterable<Deposit> getAllDepositsByAccountId(Long accountId){
-
         Iterable<Deposit> deposits = depositRepo.findAll();
-
         for(Deposit deposit : deposits){
             if(deposit.getPayee_id().equals(accountId)){
                 return deposits;

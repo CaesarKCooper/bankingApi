@@ -21,7 +21,7 @@ public class AccountController {
     public ResponseEntity<?> getAccountById(@PathVariable Long accountId){
 
 
-        return new ResponseEntity<>(accountService.getAccountById(accountId), HttpStatus.OK);
+        return new ResponseEntity<>(accountService.getAccountByAccountId(accountId), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/customers/{customerId}/accounts")

@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DepositRepo extends CrudRepository<Deposit, Long> {
 
-    //Iterable<Deposit> findAllByAccountId(Long payee_id);
 }
