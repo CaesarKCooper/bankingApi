@@ -5,15 +5,14 @@ import org.springframework.http.HttpStatus;
 
 
 public class CodeMessage {
+
     private int code;
     private String message;
-
 
     public CodeMessage(String message){
         this.code = HttpStatus.NOT_FOUND.value();
         this.message = message;
     }
-
 
     public CodeMessage(int code, String message) {
         this.code = code;
@@ -35,6 +34,4 @@ public class CodeMessage {
     public void setMessage(String message) {
         this.message = message;
     }
-
-
 }

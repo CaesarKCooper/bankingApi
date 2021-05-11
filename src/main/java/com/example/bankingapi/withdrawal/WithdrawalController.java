@@ -17,21 +17,26 @@ public class WithdrawalController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/accounts/{accountId}/withdrawals")
     public ResponseEntity<Iterable<Withdrawal>> getAllWithdrawalsByAccountId(@PathVariable Long accountId) {
+
         return new ResponseEntity<>(withdrawalService.getAllWithdrawalsByAccountId(accountId), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/withdrawals/{withdrawalId}", method = RequestMethod.GET)
     public ResponseEntity<?> getWithdrawalById(@PathVariable Long withdrawalId){
-        Optional<Withdrawal> p = withdrawalService.getWithdrawalById(withdrawalId);
+
+        Optional<Withdrawal> p = withdrawalService.getWithdrawalByWithdrawalId(withdrawalId);
         return new ResponseEntity<> (p, HttpStatus.OK);
     }
+
     @RequestMapping(method = RequestMethod.POST, value = "/accounts/{accountId}/withdrawals")
     public ResponseEntity<?> createWithdrawals(@PathVariable Long accountId, @RequestBody Withdrawal withdrawal){
-        return new ResponseEntity<>( withdrawalService.createWithdrawal(withdrawal, accountId), HttpStatus.CREATED);
+
+        return new ResponseEntity<>(withdrawalService.createWithdrawal(withdrawal, accountId), HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/withdrawals/{withdrawalId}")
     public ResponseEntity<?> updateWithdrawal(@PathVariable Long withdrawalId, @RequestBody Withdrawal withdrawal){
+
         withdrawalService.updateWithdrawal(withdrawal);
         return new ResponseEntity<>("Accepted deposit modification", HttpStatus.OK);
     }
@@ -39,8 +44,8 @@ public class WithdrawalController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/withdrawals/{withdrawalId}")
     public ResponseEntity<?> deleteWithdrawal(@PathVariable Long withdrawalId){
+
         withdrawalService.deleteWithdrawal(withdrawalId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }

@@ -10,28 +10,13 @@ public class Address {
 
     @Id
     @JsonIgnore
-    @GeneratedValue(strategy = GenerationType.AUTO) //randomly assigned value
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
-
-    @Column(name = "street_number")
     public String street_number;
-
-    @Column(name = "street_name")
     public String street_name;
-
-    @Column(name = "city")
     public String city;
-
-    @Column(name = "state")
     public String state;
-
-    @Column(name = "zip")
     public String zip;
-
-
-    public Address() {
-    }
 
     public Long getId() {
         return id;

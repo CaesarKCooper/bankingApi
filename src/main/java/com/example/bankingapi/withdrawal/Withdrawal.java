@@ -8,7 +8,6 @@ public class Withdrawal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String transaction_date;
     private String status;
     private Long payer_id;
@@ -71,8 +70,4 @@ public class Withdrawal {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public Withdrawal() {
-    }
-
 }

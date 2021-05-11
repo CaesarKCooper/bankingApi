@@ -12,8 +12,6 @@ public class Deposit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-
     private String type;
     private String transaction_date;
     private String status;
@@ -21,11 +19,6 @@ public class Deposit {
     private String medium;
     private Double amount;
     private String description;
-
-
-    public Deposit() {
-
-    }
 
     public Long getId() {
         return id;
@@ -89,17 +82,5 @@ public class Deposit {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "Deposit{" +
-                "type='" + type + '\'' +
-                ", transaction_date='" + transaction_date + '\'' +
-                ", status='" + status + '\'' +
-                ", payee_id=" + payee_id +
-                ", medium='" + medium + '\'' +
-                ", amount=" + amount +
-                '}';
     }
 }
