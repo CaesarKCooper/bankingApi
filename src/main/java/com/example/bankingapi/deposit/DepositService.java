@@ -24,7 +24,7 @@ public class DepositService {
 
     public Deposit createDeposit(Deposit deposit, Long accountId) {
         //
-        Optional<Account> account = accountService;
+        Optional<Account> account = accountService.getAccountById(accountId);
         Double accountBalance = account.get().getBalance();
         Double depositAmount = deposit.getAmount();
         Double transaction = depositAmount += accountBalance;
