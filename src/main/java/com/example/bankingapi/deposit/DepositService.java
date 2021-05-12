@@ -25,6 +25,11 @@ public class DepositService {
     public Iterable<Deposit> getAllDepositsByAccountId(Long accountId){
 
         depositLog.info("===== RETRIEVING ALL DEPOSITS BY ACCOUNT ID =====");
+        return depositRepo.getDepositsByAccountId(accountId);
+    }
+
+    public Optional<Deposit> getDepositByAccountId(Long accountId){
+
         return depositRepo.getDepositByAccountId(accountId);
     }
 
@@ -49,9 +54,24 @@ public class DepositService {
         return depositRepo.save(deposit);
     }
 
-    public void updateDeposit(Deposit deposit, Long accountId){
+    public void updateDeposit(Deposit deposit, Long depositId){
 
         depositLog.info("===== UPDATING DEPOSIT =====");
+
+        Account account = accountService.getAccountByAccountId(deposit.getPayee_id()).orElse(null);
+
+        Double oldDepositAmount = depositRepo.findById(depositId).get().getAmount();
+
+        Double accountBalance = account.getBalance();
+
+        Double oldBalance = accountBalance - oldDepositAmount;
+        account.setBalance(oldBalance);
+
+        Double depositAmount = deposit.getAmount();
+
+        Double transaction = oldBalance + depositAmount;
+        account.setBalance(transaction);
+
         depositRepo.save(deposit);
     }
 

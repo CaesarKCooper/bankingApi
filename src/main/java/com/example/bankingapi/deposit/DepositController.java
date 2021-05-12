@@ -44,7 +44,6 @@ public class DepositController {
             CodeMessage exception = new CodeMessage(404, "error fetching deposit with id " + depositsId);
             return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
         }
-
         CodeData response = new CodeData(200, deposit);
         return new ResponseEntity<>(depositService.getDepositByDepositId(depositsId),HttpStatus.OK);
     }

@@ -13,11 +13,10 @@ import java.util.Optional;
 public interface DepositRepo extends CrudRepository<Deposit, Long> {
 
 
-
-    @Query(value = "SELECT * FROM Deposit WHERE account_id = ?1", nativeQuery = true)
-    List<Deposit> getDepositByAccountId(Long accountId);
+    @Query(value = "SELECT * FROM Deposit WHERE payee_id = ?1", nativeQuery = true)
+    List<Deposit> getDepositsByAccountId(Long accountId);
 
     @Query(value = "SELECT * FROM Deposit WHERE payee_id = ?1", nativeQuery = true)
     Optional<Deposit> getDepositByAccountId(Long accountId);
 }
-}
+
