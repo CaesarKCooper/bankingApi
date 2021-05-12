@@ -26,7 +26,7 @@ public class AccountController {
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
 
-        CodeMessage exception = new CodeMessage(404,"error fetching bills");
+        CodeMessage exception = new CodeMessage(404,"Error fetching accounts");
         return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
     }
 
@@ -35,7 +35,7 @@ public class AccountController {
 
         Optional<Account> account = accountService.getAccountByAccountId(accountId);
         if (account.isEmpty()) {
-            CodeMessage exception = new CodeMessage(404,"error fetching account with id: " + accountId);
+            CodeMessage exception = new CodeMessage(404,"Error fetching account with id: " + accountId);
             return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
         }
         CodeMessageData response = new CodeMessageData(200, "Success", account);
@@ -50,7 +50,7 @@ public class AccountController {
             CodeMessageData response = new CodeMessageData(200, "Success", accounts);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
-        CodeMessage exception = new CodeMessage(404,"error fetching accounts");
+        CodeMessage exception = new CodeMessage(404,"Error fetching accounts");
         return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
     }
 
