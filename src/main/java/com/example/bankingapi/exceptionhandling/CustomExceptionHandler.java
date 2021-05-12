@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
@@ -16,5 +17,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler{
 
         CodeMessage ef = new CodeMessage(status.value(), ex.getMessage());
         return super.handleExceptionInternal(ex, ef, headers, status, request);
+    }
+
+    @ExceptionHandler(value = NoHandlerFoundException.class)
+    @ResponseStatus(value= HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public ResponseEntity<?> noHandlerFound() {
+        CodeMessage error = new CodeMessage(404, "Resource Not Found");
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }

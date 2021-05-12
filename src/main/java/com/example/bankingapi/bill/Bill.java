@@ -99,4 +99,3 @@ public class Bill {
         this.account_id = account_id;
     }
 }
-

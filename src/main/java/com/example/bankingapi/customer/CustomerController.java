@@ -79,7 +79,7 @@ public class CustomerController {
     @RequestMapping(value = "/customer/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteCustomer(@PathVariable Long id){
         if(!customerService.customerCheck(id)){
-            CodeMessage exception = new CodeMessage("This id does not exist in customer");
+            CodeMessage exception = new CodeMessage(404, "This id does not exist in customer");
             return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
         }
         customerService.deleteCustomer(id);
