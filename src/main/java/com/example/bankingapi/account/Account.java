@@ -7,8 +7,6 @@ import javax.persistence.*;
 @Entity
 public class Account {
 
-    //at end change customer id to Customer customer and only show id//
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,11 +18,6 @@ public class Account {
     @Column
     private Double balance;
     private Long customerId;
-
-    /*@JsonIgnore
-    @ManyToOne
-    private Customer customer;*/
-
 
     public Long getId() {
         return id;
@@ -74,4 +67,3 @@ public class Account {
         this.customerId = customerId;
     }
 }
-

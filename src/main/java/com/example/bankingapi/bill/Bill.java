@@ -8,26 +8,16 @@ public class Bill {
     @Id
     @GeneratedValue
     private Long id;
-
     @Enumerated(EnumType.STRING)
     private StatusType status;
-
     private String payee;
-
     private String nickname;
-
     private String creation_date;
-
     private String payment_date;
-
     private Integer recurring_date;
-
     private String upcoming_payment_date;
-
     private Double payment_amount;
-
     private Long account_id;
-
 
     public Long getId() {
         return id;

@@ -16,9 +16,6 @@ public interface BillRepo extends CrudRepository<Bill, Long> {
     @Query(value = "SELECT id FROM account WHERE customer_id = ?1", nativeQuery = true)
     List<Long> getAccountIdThatMatchesCustomerId(Long customer_id);
 
-
     @Query(value = "SELECT * FROM bill as e WHERE e.account_id IN (:accountId)", nativeQuery = true)
     List<Bill> getBillsThatMatchAccountIdInBillWithAccountIdInAccountToUseAfterFindingCustomerByIdInAccount(@Param("accountId") List<Long> accountId);
-
-
 }

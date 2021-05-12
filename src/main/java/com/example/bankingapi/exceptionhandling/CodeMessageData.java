@@ -1,6 +1,7 @@
 package com.example.bankingapi.exceptionhandling;
 
 public class CodeMessageData {
+
     private int code;
     private String message;
     private Object data;
