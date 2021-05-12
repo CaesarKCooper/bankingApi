@@ -1,7 +1,7 @@
 package com.example.bankingapi.customer;
 
 
-import com.example.bankingapi.bill.BillController;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +45,11 @@ public class CustomerService {
         return customerRepository.findById(id);
     }
 
+    public boolean customerCheck(Long customerId){
+        Customer customer = customerRepository.findById(customerId).orElse(null);
+        return customer != null;
+    }
+
     public void updateCustomer(Customer customer) {
 
         customerLog.info("===== UPDATING CUSTOMER =====");
@@ -52,7 +57,6 @@ public class CustomerService {
     }
 
     public void deleteCustomer(Long id) {
-
         customerLog.info("===== DELETING CUSTOMER =====");
         customerRepository.deleteById(id);
     }
