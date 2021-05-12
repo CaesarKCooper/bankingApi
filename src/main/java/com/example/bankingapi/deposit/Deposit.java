@@ -83,7 +83,7 @@ public class Deposit {
     public void setDescription(String description) {
         this.description = description;
     }
-<<<<<<< HEAD
+
 
     @Override
     public String toString() {
@@ -98,6 +98,5 @@ public class Deposit {
                 ", description='" + description + '\'' +
                 '}';
     }
-=======
->>>>>>> 70feb59ac342dc22baa882fab3dcd4a71fee174a
+
 }
