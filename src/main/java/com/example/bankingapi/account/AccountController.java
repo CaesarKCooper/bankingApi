@@ -1,9 +1,15 @@
 package com.example.bankingapi.account;
 
+import com.example.bankingapi.exceptionhandling.CodeData;
+import com.example.bankingapi.exceptionhandling.CodeMessage;
+import com.example.bankingapi.exceptionhandling.CodeMessageData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class AccountController {
@@ -12,40 +18,78 @@ public class AccountController {
     private AccountService accountService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/accounts")
-    public ResponseEntity<Iterable<Account>> getAllAccounts(){
+    public ResponseEntity<?> getAllAccounts() {
 
-        return new ResponseEntity<>(accountService.getAllAccounts(), HttpStatus.OK);
+        Iterable<Account> accounts = accountService.getAllAccounts();
+        if (accounts.iterator().hasNext()) {
+            CodeMessageData response = new CodeMessageData(200, "Success", accounts);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+
+        CodeMessage exception = new CodeMessage(404,"error fetching bills");
+        return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/accounts/{accountId}")
-    public ResponseEntity<?> getAccountById(@PathVariable Long accountId){
+    public ResponseEntity<?> getAccountById(@PathVariable Long accountId) {
 
-        return new ResponseEntity<>(accountService.getAccountByAccountId(accountId), HttpStatus.OK);
+        Optional<Account> account = accountService.getAccountByAccountId(accountId);
+        if (account.isEmpty()) {
+            CodeMessage exception = new CodeMessage(404,"error fetching account with id: " + accountId);
+            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+        }
+        CodeMessageData response = new CodeMessageData(200, "Success", account);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/customers/{customerId}/accounts")
-    public Iterable<Account> getAllAccountsByCustomer(@PathVariable Long customerId){
+    public ResponseEntity<?> getAllAccountsByCustomer(@PathVariable Long customerId) {
 
-        return accountService.getAllAccountsByCustomer(customerId);
+        Iterable<Account> accounts = accountService.getAllAccountsByCustomer(customerId);
+        if (accounts.iterator().hasNext()) {
+            CodeMessageData response = new CodeMessageData(200, "Success", accounts);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        CodeMessage exception = new CodeMessage(404,"error fetching accounts");
+        return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/customers/{customerId}/accounts")
-    public ResponseEntity<?> createAccount(@PathVariable Long customerId, @RequestBody Account account){
+    public ResponseEntity<?> createAccount(@PathVariable Long customerId, @RequestBody Account account) {
 
-        return new ResponseEntity<>(accountService.createAccount(account), HttpStatus.CREATED);
+        Account account1 = accountService.createAccount(account);
+        if (accountService.customerCheck(customerId)) {
+            CodeMessageData response = new CodeMessageData(201, "Account created", account1);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        }
+
+        CodeMessage exception = new CodeMessage(404,"Error creating account: Customer not found");
+        return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/accounts/{accountId}")
-    public ResponseEntity<?> updateAccount(@PathVariable Long accountId, @RequestBody Account account){
+    public ResponseEntity<?> updateAccount(@PathVariable Long accountId, @RequestBody Account account) {
 
-        accountService.updateAccount(account);
-        return new ResponseEntity<>("Customer account updated",HttpStatus.OK);
+        if(accountService.accountCheck(accountId)){
+            accountService.updateAccount(account);
+            CodeMessage response = new CodeMessage(201, "Customer account updated");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+
+        CodeMessage exception = new CodeMessage(404, "Error: Account not found");
+        return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/accounts/{accountId}")
-    public ResponseEntity<?> deleteAccount(@PathVariable Long accountId){
+    public ResponseEntity<?> deleteAccount(@PathVariable Long accountId) {
 
-        accountService.deleteAccount(accountId);
-        return new ResponseEntity<>("Account successfully deleted",HttpStatus.OK);
+        if (accountService.accountCheck(accountId)) {
+            accountService.deleteAccount(accountId);
+            CodeMessage response = new CodeMessage(202 ,"Account successfully deleted");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+
+        CodeMessage exception = new CodeMessage(404,"Error: Account not found");
+        return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
     }
 }
