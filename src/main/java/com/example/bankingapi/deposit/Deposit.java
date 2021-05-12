@@ -83,4 +83,20 @@ public class Deposit {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
+    @Override
+    public String toString() {
+        return "Deposit{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", transaction_date='" + transaction_date + '\'' +
+                ", status='" + status + '\'' +
+                ", payee_id=" + payee_id +
+                ", medium='" + medium + '\'' +
+                ", amount=" + amount +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
 }
