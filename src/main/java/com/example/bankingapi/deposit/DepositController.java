@@ -27,14 +27,9 @@ public class DepositController {
         if (deposits.iterator().hasNext()) {
             CodeData response = new CodeData(200, accountId);
             return new ResponseEntity<>(response, HttpStatus.OK);
-//            CodeMessage exception = new CodeMessage(404, "Account not found" );
-//            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         CodeMessage exception = new CodeMessage(404, "Account not found" );
          return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
-//        CodeData response = new CodeData(200, accountId);
-//        return new ResponseEntity<>(depositService.getAllDepositsByAccountId(accountId), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.GET)
