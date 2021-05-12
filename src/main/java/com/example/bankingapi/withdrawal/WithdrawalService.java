@@ -1,7 +1,9 @@
 package com.example.bankingapi.withdrawal;
 
 import com.example.bankingapi.account.Account;
+import com.example.bankingapi.account.AccountRepository;
 import com.example.bankingapi.account.AccountService;
+import com.example.bankingapi.bill.Bill;
 import com.example.bankingapi.deposit.Deposit;
 import com.example.bankingapi.deposit.DepositController;
 import org.slf4j.Logger;
@@ -57,5 +59,17 @@ public class WithdrawalService {
 
         withdrawalLog.info("===== DELETING WITHDRAWAL =====");
         withdrawalRepository.deleteById(withdrawalId);
+    }
+    public boolean withdrawalCheck(Long withdrawalId){
+
+        Withdrawal withdrawal = withdrawalRepository.findById(withdrawalId).orElse(null);
+        return withdrawal != null;
+    }
+    @Autowired
+    AccountRepository accountRepository;
+    public boolean accountCheck(Long accountId){
+
+        Account account = accountRepository.findById(accountId).orElse(null);
+        return account != null;
     }
 }
