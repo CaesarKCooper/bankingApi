@@ -1,5 +1,9 @@
 package com.example.bankingapi.account;
 
+import com.example.bankingapi.bill.Bill;
+import com.example.bankingapi.customer.Customer;
+import com.example.bankingapi.customer.CustomerRepository;
+import com.example.bankingapi.customer.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,9 @@ public class AccountService {
 
     @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    CustomerRepository customerRepository;
 
     public Iterable<Account> getAllAccounts(){
 
@@ -31,6 +38,18 @@ public class AccountService {
 
         accountLog.info("===== RETRIEVING ALL ACCOUNTS BY CUSTOMER ID =====");
         return accountRepository.findAllByCustomerId(customerId);
+    }
+
+    public boolean customerCheck(Long accountId){
+
+        Customer customer = customerRepository.findById(accountId).orElse(null);
+        return customer != null;
+    }
+
+    public boolean accountCheck(Long accountId){
+
+        Account account = getAccountByAccountId(accountId).orElse(null);
+        return account != null;
     }
 
     public Account createAccount(Account account){
