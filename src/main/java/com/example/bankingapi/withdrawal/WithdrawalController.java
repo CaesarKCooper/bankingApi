@@ -37,8 +37,8 @@ public class WithdrawalController {
     @RequestMapping(method = RequestMethod.PUT, value = "/withdrawals/{withdrawalId}")
     public ResponseEntity<?> updateWithdrawal(@PathVariable Long withdrawalId, @RequestBody Withdrawal withdrawal){
 
-        withdrawalService.updateWithdrawal(withdrawal);
-        return new ResponseEntity<>("Accepted deposit modification", HttpStatus.OK);
+        withdrawalService.updateWithdrawal(withdrawal, withdrawalId);
+        return new ResponseEntity<>("Accepted  modification", HttpStatus.OK);
     }
 
 

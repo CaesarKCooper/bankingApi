@@ -47,10 +47,9 @@ public class WithdrawalService {
         return withdrawalRepository.findById(withdrawalId);
     }
 
-    public void updateWithdrawal(Withdrawal withdrawal) {
+    public void updateWithdrawal(Withdrawal withdrawal, Long withdrawalId) {
 
-        withdrawalLog.info("===== UPDATING WITHDRAWAL =====");
-        withdrawalRepository.save(withdrawal);
+
     }
 
     public void deleteWithdrawal(Long withdrawalId) {
