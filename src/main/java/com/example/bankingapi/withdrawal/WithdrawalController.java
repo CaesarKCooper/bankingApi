@@ -58,7 +58,7 @@ public class WithdrawalController {
             return new ResponseEntity<>(exception, HttpStatus.CREATED);
         }
         Withdrawal w1 = withdrawalService.createWithdrawal(withdrawal, accountId);
-        CodeMessageData response = new CodeMessageData(201, "Created bill and added it to the account", w1);
+        CodeMessageData response = new CodeMessageData(201, "Created withdrawal and deducted it from the account", w1);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -70,7 +70,7 @@ public class WithdrawalController {
             return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
         }
 
-        withdrawalService.updateWithdrawal(withdrawal);
+        withdrawalService.updateWithdrawal(withdrawal, withdrawalId);
         CodeMessage response = new CodeMessage(202, "Accepted withdrawal modification");
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
@@ -86,5 +86,4 @@ public class WithdrawalController {
         withdrawalService.deleteWithdrawal(withdrawalId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }

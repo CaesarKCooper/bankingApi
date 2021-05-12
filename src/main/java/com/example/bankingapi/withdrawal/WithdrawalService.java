@@ -49,9 +49,24 @@ public class WithdrawalService {
         return withdrawalRepository.findById(withdrawalId);
     }
 
-    public void updateWithdrawal(Withdrawal withdrawal) {
+    public void updateWithdrawal(Withdrawal withdrawal, Long withdrawalId) {
 
         withdrawalLog.info("===== UPDATING WITHDRAWAL =====");
+
+        Account account = accountService.getAccountByAccountId(withdrawal.getPayer_id()).orElse(null);
+
+        Double oldWithdrawalAmount = withdrawalRepository.findById(withdrawalId).get().getAmount();
+
+        Double accountBalance = account.getBalance();
+
+        Double oldBalance = accountBalance + oldWithdrawalAmount;
+        account.setBalance(oldBalance);
+
+        Double depositAmount = withdrawal.getAmount();
+
+        Double transaction = oldBalance - depositAmount;
+        account.setBalance(transaction);
+
         withdrawalRepository.save(withdrawal);
     }
 
