@@ -35,6 +35,7 @@ public class WithdrawalService {
 
         withdrawalLog.info("===== CREATING WITHDRAWAL =====");
         Optional<Account> account = accountService.getAccountByAccountId(accountId);
+
         Double accountBalance = account.get().getBalance();
         Double withdrawalAmount = withdrawal.getAmount();
 
@@ -80,6 +81,7 @@ public class WithdrawalService {
         Withdrawal withdrawal = withdrawalRepository.findById(withdrawalId).orElse(null);
         return withdrawal != null;
     }
+
     @Autowired
     AccountRepository accountRepository;
     public boolean accountCheck(Long accountId){
@@ -87,4 +89,5 @@ public class WithdrawalService {
         Account account = accountRepository.findById(accountId).orElse(null);
         return account != null;
     }
+
 }
