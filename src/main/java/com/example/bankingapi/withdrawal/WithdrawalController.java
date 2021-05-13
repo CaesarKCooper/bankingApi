@@ -1,6 +1,7 @@
 package com.example.bankingapi.withdrawal;
 
 
+import com.example.bankingapi.account.Account;
 import com.example.bankingapi.bill.Bill;
 import com.example.bankingapi.exceptionhandling.CodeData;
 import com.example.bankingapi.exceptionhandling.CodeMessage;
@@ -55,7 +56,11 @@ public class WithdrawalController {
     public ResponseEntity<?> createWithdrawal(@PathVariable Long accountId, @RequestBody Withdrawal withdrawal) {
         if (!withdrawalService.accountCheck(accountId)) {
             CodeMessage exception = new CodeMessage("Error creating withdrawal: Account not found");
-            return new ResponseEntity<>(exception, HttpStatus.CREATED);
+            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+        }
+        if (withdrawalService.checkWithdrawPossible(accountId, withdrawal)){
+            CodeMessage newException = new CodeMessage("Insufficient Funds");
+            return new ResponseEntity<>(newException, HttpStatus.BAD_REQUEST);
         }
         Withdrawal w1 = withdrawalService.createWithdrawal(withdrawal, accountId);
         CodeMessageData response = new CodeMessageData(201, "Created withdrawal and deducted it from the account", w1);

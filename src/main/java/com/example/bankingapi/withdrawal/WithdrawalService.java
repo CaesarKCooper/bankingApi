@@ -6,6 +6,7 @@ import com.example.bankingapi.account.AccountService;
 import com.example.bankingapi.bill.Bill;
 import com.example.bankingapi.deposit.Deposit;
 import com.example.bankingapi.deposit.DepositController;
+import com.example.bankingapi.exceptionhandling.CodeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,11 @@ public class WithdrawalService {
 
         withdrawalLog.info("===== CREATING WITHDRAWAL =====");
         Optional<Account> account = accountService.getAccountByAccountId(accountId);
+        //checking so that we cant go into the negatives
+        if (account.get().getBalance() == 0){
+
+        }
+        //
         Double accountBalance = account.get().getBalance();
         Double withdrawalAmount = withdrawal.getAmount();
 
@@ -87,4 +93,17 @@ public class WithdrawalService {
         Account account = accountRepository.findById(accountId).orElse(null);
         return account != null;
     }
+
+
+    public boolean checkWithdrawPossible(Long accountId, Withdrawal withdrawal){
+    if (accountService.getAccountByAccountId(accountId).get().getBalance() <= withdrawal.getAmount()){
+        return false;
+    }
+        return true;
+    }
+
+
+
+
+
 }
