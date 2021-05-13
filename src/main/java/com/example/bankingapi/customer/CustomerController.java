@@ -3,15 +3,12 @@ package com.example.bankingapi.customer;
 
 import com.example.bankingapi.exceptionhandling.CodeMessage;
 import com.example.bankingapi.exceptionhandling.CodeMessageData;
-import org.aspectj.apache.bcel.classfile.Code;
-import org.hibernate.PropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 public class CustomerController {

@@ -1,7 +1,7 @@
 package com.example.bankingapi.deposit;
 
 import javax.persistence.*;
-import javax.xml.transform.sax.SAXResult;
+
 
 @Entity
 public class Deposit {

@@ -1,21 +1,12 @@
 package com.example.bankingapi.withdrawal;
-
-
-import com.example.bankingapi.account.Account;
 import com.example.bankingapi.account.AccountRepository;
-import com.example.bankingapi.bill.Bill;
 import com.example.bankingapi.exceptionhandling.CodeData;
 import com.example.bankingapi.exceptionhandling.CodeMessage;
 import com.example.bankingapi.exceptionhandling.CodeMessageData;
-import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
-import javax.swing.text.html.Option;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -75,6 +66,7 @@ public class WithdrawalController {
             } } catch (Exception e){
             CodeMessage error = new CodeMessage(404, "Error creating withdrawal");
             return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+
         }
     }
 

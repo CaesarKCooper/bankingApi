@@ -1,6 +1,4 @@
 package com.example.bankingapi.account;
-import com.example.bankingapi.customer.Customer;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 

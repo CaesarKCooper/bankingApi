@@ -2,13 +2,10 @@ package com.example.bankingapi.deposit;
 import com.example.bankingapi.account.Account;
 import com.example.bankingapi.account.AccountRepository;
 import com.example.bankingapi.account.AccountService;
-import com.example.bankingapi.customer.CustomerController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 @Service
 public class DepositService {
