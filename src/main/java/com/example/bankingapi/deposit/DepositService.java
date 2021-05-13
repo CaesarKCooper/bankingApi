@@ -1,13 +1,11 @@
 package com.example.bankingapi.deposit;
 import com.example.bankingapi.account.Account;
+import com.example.bankingapi.account.AccountRepository;
 import com.example.bankingapi.account.AccountService;
-import com.example.bankingapi.customer.CustomerController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 @Service
 public class DepositService {
@@ -20,6 +18,8 @@ public class DepositService {
     DepositRepo depositRepo;
     @Autowired
     AccountService accountService;
+    @Autowired
+    AccountRepository accountRepository;
 
 
     public Iterable<Deposit> getAllDepositsByAccountId(Long accountId){
@@ -85,5 +85,11 @@ public class DepositService {
 
         Deposit deposit = depositRepo.findById(accountId).orElse(null);
         return deposit != null;
+    }
+
+    public boolean accountCheck(Long accountId){
+
+        Account account = accountRepository.findById(accountId).orElse(null);
+        return account != null;
     }
 }

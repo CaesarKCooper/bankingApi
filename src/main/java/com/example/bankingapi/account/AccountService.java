@@ -1,9 +1,7 @@
 package com.example.bankingapi.account;
 
-import com.example.bankingapi.bill.Bill;
 import com.example.bankingapi.customer.Customer;
 import com.example.bankingapi.customer.CustomerRepository;
-import com.example.bankingapi.customer.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -38,7 +38,6 @@ public class DepositController {
         }
         CodeMessage exception = new CodeMessage(404, "There are no deposits" );
          return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
-
     }
 
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.GET)
@@ -53,16 +52,21 @@ public class DepositController {
     }
 
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.POST)
-    public ResponseEntity<?> createDeposit(@PathVariable Long accountId, @RequestBody Deposit deposit){
+    public ResponseEntity<?> createDeposit(@PathVariable Long accountId, @RequestBody Deposit deposit) {
 
-        Deposit deposit1 = depositService.createDeposit(deposit, accountId);
-        if (depositService.depositCheck(accountId)){
-            CodeMessage response = new CodeMessage(201, "Created deposit and added it to the account");
-            return new ResponseEntity<>(depositService.createDeposit(deposit, accountId), HttpStatus.CREATED);
+        if (!depositService.accountCheck(accountId)) {
+            CodeMessage exception = new CodeMessage("Error creating withdrawal: Account not found");
+            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
         }
-        CodeMessage exception = new CodeMessage(404, "Error creating deposit: Account not found");
-        return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+        Deposit deposit1 = depositService.createDeposit(deposit, accountId);
+        if(deposit1.getAmount() <= 0){
+            CodeMessage exception = new CodeMessage("Error creating deposit: Deposit amount must be greater than zero");
+            return new ResponseEntity<>(exception, HttpStatus.BAD_REQUEST);
+        }
+        CodeMessageData response = new CodeMessageData(201, "Created deposit and added it to the account", deposit1);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+    
 
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateDeposit(@PathVariable Long depositsId, @RequestBody Deposit deposit){

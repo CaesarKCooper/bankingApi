@@ -1,7 +1,6 @@
 package com.example.bankingapi.customer;
 
 import com.example.bankingapi.address.Address;
-
 import javax.persistence.*;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -9,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
 
 @Entity
 @Table(name = "customer")
@@ -18,8 +18,11 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "customer_id")
     private Long id;
+    @Column(nullable = false)
     private String first_name;
+    @Column(nullable = false)
     private String last_name;
+    @Column(nullable = false)
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Address> address;
 

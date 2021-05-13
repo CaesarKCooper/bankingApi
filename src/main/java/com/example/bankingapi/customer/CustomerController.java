@@ -3,14 +3,12 @@ package com.example.bankingapi.customer;
 
 import com.example.bankingapi.exceptionhandling.CodeMessage;
 import com.example.bankingapi.exceptionhandling.CodeMessageData;
-import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 public class CustomerController {
@@ -20,18 +18,20 @@ public class CustomerController {
 
     @RequestMapping(value = "/customers", method = RequestMethod.POST)
     public ResponseEntity<?> createCustomer(@RequestBody Customer customer) {
-        if(customer == null){
+
+        try {
+            CodeMessageData response = new CodeMessageData(200, "Customer account created", customerService.createCustomer(customer));
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (Exception e){
             CodeMessage error = new CodeMessage(404, "Error creating customer");
             return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
         }
-        CodeMessageData response = new CodeMessageData(200, "Customer account created", customerService.createCustomer(customer));
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public ResponseEntity<?> getAllCustomers() {
         List<Customer> p = customerService.getAllCustomers();
-        if(p == null){
+        if(p.isEmpty()){
             CodeMessage error = new CodeMessage(404, "Error fetching customers");
             return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
         }
