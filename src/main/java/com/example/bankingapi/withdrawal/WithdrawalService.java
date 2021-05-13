@@ -89,5 +89,4 @@ public class WithdrawalService {
         Account account = accountRepository.findById(accountId).orElse(null);
         return account != null;
     }
-
 }

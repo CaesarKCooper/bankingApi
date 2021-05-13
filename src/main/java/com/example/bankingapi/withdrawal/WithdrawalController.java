@@ -1,6 +1,8 @@
 package com.example.bankingapi.withdrawal;
 
 
+import com.example.bankingapi.account.Account;
+import com.example.bankingapi.account.AccountRepository;
 import com.example.bankingapi.bill.Bill;
 import com.example.bankingapi.exceptionhandling.CodeData;
 import com.example.bankingapi.exceptionhandling.CodeMessage;
@@ -24,6 +26,9 @@ public class WithdrawalController {
 
     @Autowired
     WithdrawalRepository withdrawalRepository;
+
+    @Autowired
+    AccountRepository accountRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "/accounts/{accountId}/withdrawals")
     public ResponseEntity<?> getAllWithdrawalsByAccountId(@PathVariable Long accountId) {
@@ -53,19 +58,22 @@ public class WithdrawalController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/accounts/{accountId}/withdrawals")
     public ResponseEntity<?> createWithdrawal(@PathVariable Long accountId, @RequestBody Withdrawal withdrawal) {
-        if (!withdrawalService.accountCheck(accountId)) {
-            CodeMessage exception = new CodeMessage("Error creating withdrawal: Account not found");
-            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
-        }
-        Withdrawal w1 = withdrawalService.createWithdrawal(withdrawal, accountId);
-        if(w1.getAmount() <= 0){
-            CodeMessage exception = new CodeMessage("Error creating withdrawal: Withdrawal amount must be greater than zero");
-            return new ResponseEntity<>(exception, HttpStatus.BAD_REQUEST);
-        }
-        CodeMessageData response = new CodeMessageData(201, "Created withdrawal and deducted it from the account", w1);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }
 
+        if (!withdrawalService.accountCheck(accountId)) {
+            CodeMessage exception = new CodeMessage(404,"Error creating withdrawal: Account not found");
+            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+        } else if (withdrawal.getAmount() >= accountRepository.findById(accountId).get().getBalance()) {
+            CodeMessage exception = new CodeMessage(404, "Error creating withdrawal: Over withdrawal");
+            return new ResponseEntity<>(exception, HttpStatus.BAD_REQUEST);
+        } else if (withdrawal.getAmount() <= 0) {
+            CodeMessage exception = new CodeMessage(404 ,"Error creating withdrawal: Withdrawal amount must be greater than zero");
+            return new ResponseEntity<>(exception, HttpStatus.BAD_REQUEST);
+        } else {
+            Withdrawal w1 = withdrawalService.createWithdrawal(withdrawal, accountId);
+            CodeMessageData response = new CodeMessageData(201, "Created withdrawal and deducted it from the account", w1);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        }
+    }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/withdrawals/{withdrawalId}")
     public ResponseEntity<?> updateWithdrawal(@PathVariable Long withdrawalId, @RequestBody Withdrawal withdrawal) {
