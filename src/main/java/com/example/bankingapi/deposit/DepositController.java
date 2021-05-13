@@ -44,7 +44,7 @@ public class DepositController {
     }
 
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.POST)
-    public ResponseEntity<?> createDeposit(@PathVariable Long accountId, @RequestBody Deposit deposit){
+    public ResponseEntity<?> createDeposit(@PathVariable Long accountId, @RequestBody Deposit deposit) {
 
         if (!depositService.accountCheck(accountId)) {
             CodeMessage exception = new CodeMessage("Error creating withdrawal: Account not found");
@@ -58,6 +58,7 @@ public class DepositController {
         CodeMessageData response = new CodeMessageData(201, "Created deposit and added it to the account", deposit1);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+    
 
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateDeposit(@PathVariable Long depositsId, @RequestBody Deposit deposit){

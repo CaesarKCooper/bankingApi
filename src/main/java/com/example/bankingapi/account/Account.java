@@ -10,13 +10,14 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+    @Column(nullable = false)
     AccountType type;
     private String nickname;
-    @Column
+    @Column(nullable = false)
     private Integer rewards;
-    @Column
+    @Column(nullable = false)
     private Double balance;
+    @Column(nullable = false)
     private Long customerId;
 
     public Long getId() {
@@ -67,3 +68,14 @@ public class Account {
         this.customerId = customerId;
     }
 }
+
+//get account balance
+//check account balance against withdrawal amount -- we do this by:
+//using comparison operator --
+//balance < withdrawal
+//think about how to check this... if statement!
+//if (balance > withdrawal) then return true
+//WE DONE
+//what do we do with this code now? we want to use this boolean in our create method
+// ok... this is the real tricky part
+//

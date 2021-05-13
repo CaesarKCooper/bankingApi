@@ -55,16 +55,19 @@ public class BillController {
     }
 
     @PostMapping("/accounts/{accountId}/bills")
-    public ResponseEntity<?> createBill(@RequestBody Bill bill, @PathVariable Long accountId){
-
-        if(!billService.accountCheck(accountId)){
-            CodeMessage exception = new CodeMessage("Error creating bill: Account not found");
-            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> createBill(@RequestBody Bill bill, @PathVariable Long accountId) {
+        try {
+            if (!billService.accountCheck(accountId)) {
+                CodeMessage exception = new CodeMessage("Error creating bill: Account not found");
+                return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+            } else {
+                Bill b1 = billService.createBill(bill);
+            CodeMessageData response = new CodeMessageData(201, "Created bill and added it to the account", b1);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } } catch (Exception e){
+            CodeMessage error = new CodeMessage(404, "Error creating bill");
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
         }
-
-        Bill b1 = billService.createBill(bill);
-        CodeMessageData response = new CodeMessageData(201, "Created bill and added it to the account", b1);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @PutMapping("/bills/{billId}")

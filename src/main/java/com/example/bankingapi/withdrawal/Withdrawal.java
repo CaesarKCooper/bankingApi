@@ -8,11 +8,17 @@ public class Withdrawal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String transaction_date;
+    @Column(nullable = false)
     private String status;
+    @Column(nullable = false)
     private Long payer_id;
+    @Column(nullable = false)
     private String medium;
+    @Column(nullable = false)
     private Double amount;
+    @Column(nullable = false)
     private String description;
 
     public Long getId() {
