@@ -1,5 +1,6 @@
 package com.example.bankingapi.deposit;
 import com.example.bankingapi.account.Account;
+import com.example.bankingapi.account.AccountService;
 import com.example.bankingapi.exceptionhandling.CodeData;
 import com.example.bankingapi.exceptionhandling.CodeMessage;
 import com.example.bankingapi.exceptionhandling.CodeMessageData;
@@ -20,27 +21,30 @@ public class DepositController {
     @Autowired
     private DepositRepo depositRepo;
 
+    @Autowired
+    AccountService accountService;
+
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.GET)
     public ResponseEntity<?> getAllDepositsByAccountId(@PathVariable Long accountId) {
 
         Iterable<Deposit> deposits = depositService.getAllDepositsByAccountId(accountId);
         if (deposits.iterator().hasNext()) {
-            CodeData response = new CodeData(200, accountId);
+            CodeData response = new CodeData(200, deposits);
             return new ResponseEntity<>(response, HttpStatus.OK);
-//            CodeMessage exception = new CodeMessage(404, "Account not found" );
-//            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        CodeMessage exception = new CodeMessage(404, "Account not found" );
+        if (!accountService.accountCheck(accountId)){
+            CodeMessage exception1 = new CodeMessage(404, "Account not found" );
+            return new ResponseEntity<>(exception1, HttpStatus.NOT_FOUND);
+        }
+        CodeMessage exception = new CodeMessage(404, "There are no deposits" );
          return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
-//        CodeData response = new CodeData(200, accountId);
-//        return new ResponseEntity<>(depositService.getAllDepositsByAccountId(accountId), HttpStatus.OK);
+
     }
 
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.GET)
     public ResponseEntity<?> getDepositById(@PathVariable Long depositsId) {
         Optional<Deposit> deposit = depositService.getDepositByDepositId(depositsId);
-        if (deposit == null) {
+        if (deposit.isEmpty()) {
             CodeMessage exception = new CodeMessage(404, "error fetching deposit with id " + depositsId);
             return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
         }
@@ -63,20 +67,18 @@ public class DepositController {
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateDeposit(@PathVariable Long depositsId, @RequestBody Deposit deposit){
 
-        if(depositService.depositCheck(depositsId)){
-            depositService.updateDeposit(deposit, depositsId);
+        if(!depositService.depositCheck(depositsId)){
             CodeMessage exception = new CodeMessage(404, "Deposit ID does not exist");
             return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
         }
-
+        depositService.updateDeposit(deposit, depositsId);
         return new ResponseEntity<>("Accepted deposit modification", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteDeposit(@PathVariable Long depositsId) {
 
-        if (depositService.depositCheck(depositsId)){
-            depositService.deleteDeposit(depositsId);
+        if (!depositService.depositCheck(depositsId)){
             CodeMessage exception = new CodeMessage(404, "This id does not exist in deposits");
             return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
         }
