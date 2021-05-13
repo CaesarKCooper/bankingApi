@@ -55,9 +55,13 @@ public class WithdrawalController {
     public ResponseEntity<?> createWithdrawal(@PathVariable Long accountId, @RequestBody Withdrawal withdrawal) {
         if (!withdrawalService.accountCheck(accountId)) {
             CodeMessage exception = new CodeMessage("Error creating withdrawal: Account not found");
-            return new ResponseEntity<>(exception, HttpStatus.CREATED);
+            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
         }
         Withdrawal w1 = withdrawalService.createWithdrawal(withdrawal, accountId);
+        if(w1.getAmount() <= 0){
+            CodeMessage exception = new CodeMessage("Error creating withdrawal: Withdrawal amount must be greater than zero");
+            return new ResponseEntity<>(exception, HttpStatus.BAD_REQUEST);
+        }
         CodeMessageData response = new CodeMessageData(201, "Created withdrawal and deducted it from the account", w1);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

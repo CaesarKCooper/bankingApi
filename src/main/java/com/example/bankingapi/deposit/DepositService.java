@@ -1,5 +1,6 @@
 package com.example.bankingapi.deposit;
 import com.example.bankingapi.account.Account;
+import com.example.bankingapi.account.AccountRepository;
 import com.example.bankingapi.account.AccountService;
 import com.example.bankingapi.customer.CustomerController;
 import org.slf4j.Logger;
@@ -20,6 +21,8 @@ public class DepositService {
     DepositRepo depositRepo;
     @Autowired
     AccountService accountService;
+    @Autowired
+    AccountRepository accountRepository;
 
 
     public Iterable<Deposit> getAllDepositsByAccountId(Long accountId){
@@ -85,5 +88,11 @@ public class DepositService {
 
         Deposit deposit = depositRepo.findById(accountId).orElse(null);
         return deposit != null;
+    }
+
+    public boolean accountCheck(Long accountId){
+
+        Account account = accountRepository.findById(accountId).orElse(null);
+        return account != null;
     }
 }
