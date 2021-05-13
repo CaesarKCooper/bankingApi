@@ -12,10 +12,15 @@ public class Address {
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
+    @Column(nullable = false)
     public String street_number;
+    @Column(nullable = false)
     public String street_name;
+    @Column(nullable = false)
     public String city;
+    @Column(nullable = false)
     public String state;
+    @Column(nullable = false)
     public String zip;
 
     public Long getId() {

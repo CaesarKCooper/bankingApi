@@ -57,14 +57,18 @@ public class AccountController {
     @RequestMapping(method = RequestMethod.POST, value = "/customers/{customerId}/accounts")
     public ResponseEntity<?> createAccount(@PathVariable Long customerId, @RequestBody Account account) {
 
-        Account account1 = accountService.createAccount(account);
-        if (accountService.customerCheck(customerId)) {
-            CodeMessageData response = new CodeMessageData(201, "Account created", account1);
-            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        try {
+            Account account1 = accountService.createAccount(account);
+            if (accountService.customerCheck(customerId)) {
+                CodeMessageData response = new CodeMessageData(201, "Account created", account1);
+                return new ResponseEntity<>(response, HttpStatus.CREATED);
+            }
+            CodeMessage exception = new CodeMessage(404, "Error creating account: Customer not found");
+            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            CodeMessage error = new CodeMessage(404, "Error creating account");
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
         }
-
-        CodeMessage exception = new CodeMessage(404,"Error creating account: Customer not found");
-        return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/accounts/{accountId}")

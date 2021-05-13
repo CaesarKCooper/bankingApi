@@ -1,9 +1,6 @@
 package com.example.bankingapi.deposit;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.xml.transform.sax.SAXResult;
 
 @Entity
@@ -12,12 +9,19 @@ public class Deposit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(nullable = false)
     private String type;
+    @Column(nullable = false)
     private String transaction_date;
+    @Column(nullable = false)
     private String status;
+    @Column(nullable = false)
     private Long payee_id;
+    @Column(nullable = false)
     private String medium;
+    @Column(nullable = false)
     private Double amount;
+    @Column(nullable = false)
     private String description;
 
     public Long getId() {

@@ -8,15 +8,24 @@ public class Bill {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private StatusType status;
+    @Column(nullable = false)
     private String payee;
+    @Column(nullable = false)
     private String nickname;
+    @Column(nullable = false)
     private String creation_date;
+    @Column(nullable = false)
     private String payment_date;
+    @Column(nullable = false)
     private Integer recurring_date;
+    @Column(nullable = false)
     private String upcoming_payment_date;
+    @Column(nullable = false)
     private Double payment_amount;
+    @Column(nullable = false)
     private Long account_id;
 
     public Long getId() {

@@ -44,7 +44,7 @@ public class DepositController {
     }
 
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.POST)
-    public ResponseEntity<?> createDeposit(@PathVariable Long accountId, @RequestBody Deposit deposit){
+    public ResponseEntity<?> createDeposit(@PathVariable Long accountId, @RequestBody Deposit deposit) {
 
         if (!depositService.accountCheck(accountId)) {
             CodeMessage exception = new CodeMessage("Error creating withdrawal: Account not found");
@@ -58,6 +58,23 @@ public class DepositController {
         CodeMessageData response = new CodeMessageData(201, "Created deposit and added it to the account", deposit1);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+////        try {
+//            if (!depositService.accountCheck(accountId)) {
+//                CodeMessage exception = new CodeMessage("Error creating withdrawal: Account not found");
+//                return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+//            } else if (depositService.createDeposit(deposit, accountId).getAmount() <= 0) {
+//                CodeMessage exception = new CodeMessage("Error creating deposit: Deposit amount must be greater than zero");
+//                return new ResponseEntity<>(exception, HttpStatus.BAD_REQUEST);
+//            } else {
+//                CodeMessageData response = new CodeMessageData(201, "Created deposit and added it to the account", depositService.createDeposit(deposit, accountId));
+//                return new ResponseEntity<>(response, HttpStatus.CREATED);
+////        } } catch (Exception e){
+////            CodeMessage error = new CodeMessage(404, "Error creating deposit");
+////            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+////        }
+//            }
+//        }
 
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateDeposit(@PathVariable Long depositsId, @RequestBody Deposit deposit){
