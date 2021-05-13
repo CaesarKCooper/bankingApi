@@ -47,7 +47,7 @@ public class WithdrawalController {
     public ResponseEntity<?> getWithdrawalById(@PathVariable Long withdrawalId){
 
         Optional<Withdrawal> withdrawal =  withdrawalService.getWithdrawalByWithdrawalId(withdrawalId);
-        if(withdrawal == null){
+        if(withdrawal.isEmpty()){
             CodeMessage exception = new CodeMessage("error fetching withdrawal with withdrawal id " + withdrawalId);
             return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
         }
