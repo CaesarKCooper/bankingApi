@@ -41,6 +41,7 @@ public class WithdrawalService {
 
         Double transaction = accountBalance - withdrawalAmount;
         account.get().setBalance(transaction);
+
         return withdrawalRepository.save(withdrawal);
     }
 

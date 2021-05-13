@@ -59,7 +59,7 @@ public class AccountController {
 
         Account account1 = accountService.createAccount(account);
         if (accountService.customerCheck(customerId)) {
-            CodeMessageData response = new CodeMessageData(201, "Account created", account1);
+            CodeMessageData response = new CodeMessageData(200, "Account created", account1);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         }
 
