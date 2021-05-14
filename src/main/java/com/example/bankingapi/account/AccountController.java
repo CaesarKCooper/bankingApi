@@ -1,14 +1,12 @@
 package com.example.bankingapi.account;
 
-import com.example.bankingapi.exceptionhandling.CodeData;
+
 import com.example.bankingapi.exceptionhandling.CodeMessage;
 import com.example.bankingapi.exceptionhandling.CodeMessageData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import java.util.Optional;
 
 @RestController

@@ -2,13 +2,10 @@ package com.example.bankingapi.deposit;
 import com.example.bankingapi.account.Account;
 import com.example.bankingapi.account.AccountRepository;
 import com.example.bankingapi.account.AccountService;
-import com.example.bankingapi.customer.CustomerController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 @Service
 public class DepositService {
@@ -76,6 +73,22 @@ public class DepositService {
         account.setBalance(transaction);
 
         depositRepo.save(deposit);
+
+//        Account account = accountService.getAccountByAccountId(withdrawal.getPayer_id()).orElse(null);
+//
+//        Double oldWithdrawalAmount = withdrawalRepository.findById(withdrawalId).get().getAmount();
+//
+//        Double accountBalance = account.getBalance();
+//
+//        Double oldBalance = accountBalance + oldWithdrawalAmount;
+//        account.setBalance(oldBalance);
+//
+//        Double depositAmount = withdrawal.getAmount();
+//
+//        Double transaction = oldBalance - depositAmount;
+//        account.setBalance(transaction);
+//
+//        withdrawalRepository.save(withdrawal);
     }
 
     public void deleteDeposit(Long depositsId) {

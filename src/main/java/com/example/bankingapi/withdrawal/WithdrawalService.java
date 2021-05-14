@@ -1,18 +1,11 @@
 package com.example.bankingapi.withdrawal;
-
 import com.example.bankingapi.account.Account;
 import com.example.bankingapi.account.AccountRepository;
 import com.example.bankingapi.account.AccountService;
-import com.example.bankingapi.bill.Bill;
-import com.example.bankingapi.deposit.Deposit;
-import com.example.bankingapi.deposit.DepositController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -90,4 +83,17 @@ public class WithdrawalService {
         Account account = accountRepository.findById(accountId).orElse(null);
         return account != null;
     }
+
+
+    public boolean checkWithdrawPossible(Long accountId, Withdrawal withdrawal){
+    if (accountService.getAccountByAccountId(accountId).get().getBalance() <= withdrawal.getAmount()){
+        return false;
+    }
+        return true;
+    }
+
+
+
+
+
 }

@@ -1,7 +1,5 @@
 package com.example.bankingapi.deposit;
 
-import com.example.bankingapi.account.Account;
-import com.example.bankingapi.bill.Bill;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

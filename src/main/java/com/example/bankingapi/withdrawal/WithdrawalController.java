@@ -1,21 +1,12 @@
 package com.example.bankingapi.withdrawal;
-
-
-import com.example.bankingapi.account.Account;
 import com.example.bankingapi.account.AccountRepository;
-import com.example.bankingapi.bill.Bill;
 import com.example.bankingapi.exceptionhandling.CodeData;
 import com.example.bankingapi.exceptionhandling.CodeMessage;
 import com.example.bankingapi.exceptionhandling.CodeMessageData;
-import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
-import javax.swing.text.html.Option;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -35,7 +26,7 @@ public class WithdrawalController {
 
        Iterable<Withdrawal> withdrawals =  withdrawalService.getAllWithdrawalsByAccountId(accountId);
         if(withdrawalRepository.getWithdrawalByAccountId(accountId).isEmpty()){
-            CodeMessage exception = new CodeMessage("Account not found");
+            CodeMessage exception = new CodeMessage("Withdrawal(s) not found");
         return new ResponseEntity<>(exception,HttpStatus.NOT_FOUND);
     }
         CodeData response = new CodeData(200, withdrawals);

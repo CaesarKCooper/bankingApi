@@ -1,6 +1,4 @@
 package com.example.bankingapi.withdrawal;
-
-import com.example.bankingapi.deposit.Deposit;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

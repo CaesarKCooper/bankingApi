@@ -1,7 +1,6 @@
 package com.example.bankingapi.customer;
 
 import com.example.bankingapi.address.Address;
-
 import javax.persistence.*;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -9,8 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name = "customer")
