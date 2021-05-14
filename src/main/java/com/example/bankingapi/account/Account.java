@@ -9,6 +9,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     AccountType type;
     private String nickname;
     @Column(nullable = false)
