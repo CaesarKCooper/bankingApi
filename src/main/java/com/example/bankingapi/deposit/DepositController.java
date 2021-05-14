@@ -45,14 +45,14 @@ public class DepositController {
             return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
         }
         CodeData response = new CodeData(200, deposit);
-        return new ResponseEntity<>(depositService.getDepositByDepositId(depositsId), HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.POST)
     public ResponseEntity<?> createDeposit(@PathVariable Long accountId, @RequestBody Deposit deposit) {
         try {
             if (!depositService.accountCheck(accountId)) {
-                CodeMessage exception = new CodeMessage("Error creating withdrawal: Account not found");
+                CodeMessage exception = new CodeMessage("Error creating deposit: Account not found");
                 return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
             } else if (deposit.getAmount() <= 0) {
                 CodeMessage exception = new CodeMessage("Error creating deposit: Deposit amount must be greater than zero");

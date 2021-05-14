@@ -56,9 +56,8 @@ public class AccountController {
     public ResponseEntity<?> createAccount(@PathVariable Long customerId, @RequestBody Account account) {
 
         try {
-            Account account1 = accountService.createAccount(account);
             if (accountService.customerCheck(customerId)) {
-                CodeMessageData response = new CodeMessageData(201, "Account created", account1);
+                CodeMessageData response = new CodeMessageData(201, "Account created", accountService.createAccount(account));
                 return new ResponseEntity<>(response, HttpStatus.CREATED);
             }
             CodeMessage exception = new CodeMessage(404, "Error creating account: Customer not found");
