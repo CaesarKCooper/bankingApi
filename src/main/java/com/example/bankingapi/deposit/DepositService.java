@@ -73,6 +73,22 @@ public class DepositService {
         account.setBalance(transaction);
 
         depositRepo.save(deposit);
+
+//        Account account = accountService.getAccountByAccountId(withdrawal.getPayer_id()).orElse(null);
+//
+//        Double oldWithdrawalAmount = withdrawalRepository.findById(withdrawalId).get().getAmount();
+//
+//        Double accountBalance = account.getBalance();
+//
+//        Double oldBalance = accountBalance + oldWithdrawalAmount;
+//        account.setBalance(oldBalance);
+//
+//        Double depositAmount = withdrawal.getAmount();
+//
+//        Double transaction = oldBalance - depositAmount;
+//        account.setBalance(transaction);
+//
+//        withdrawalRepository.save(withdrawal);
     }
 
     public void deleteDeposit(Long depositsId) {

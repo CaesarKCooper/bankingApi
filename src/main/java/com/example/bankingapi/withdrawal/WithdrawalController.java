@@ -26,7 +26,7 @@ public class WithdrawalController {
 
        Iterable<Withdrawal> withdrawals =  withdrawalService.getAllWithdrawalsByAccountId(accountId);
         if(withdrawalRepository.getWithdrawalByAccountId(accountId).isEmpty()){
-            CodeMessage exception = new CodeMessage("Account not found");
+            CodeMessage exception = new CodeMessage("Withdrawal(s) not found");
         return new ResponseEntity<>(exception,HttpStatus.NOT_FOUND);
     }
         CodeData response = new CodeData(200, withdrawals);
@@ -66,7 +66,6 @@ public class WithdrawalController {
             } } catch (Exception e){
             CodeMessage error = new CodeMessage(404, "Error creating withdrawal");
             return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-
         }
     }
 
